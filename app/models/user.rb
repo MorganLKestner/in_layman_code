@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-	validates :name, presence: true
+	has_many :posts
+	validates :name, :uid, presence: true
+	#validates :uid, :uniqueness => true #two users cannot have same uid
+
 	# can't create a user without name
 	#validates :uid, :uniqueness => true
 	#users who sign in can't have the same id 
