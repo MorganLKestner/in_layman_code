@@ -1,0 +1,10 @@
+<div> 
+	<%= form_for @post, method: @method, url: {action: @action} do |f| %>
+	  <%= label(:post,:title) %>
+	  <%= f.text_field :title %><br>
+	  <%= label(:post,:context) %>
+	  <%= f.text_field :context %>
+	  <br><%= f.submit "submit" %>
+	<% end %>
+	
+</div>

@@ -1,12 +1,6 @@
   <header>Layman Post</header>
 <div> 
-	<%= form_for @post, method: 'post', url: {action:'create'} do |f| %>
-	  <%= label(:post,:title) %>
-	  <%= f.text_field :title %><br>
-	  <%= label(:post,:context) %>
-	  <%= f.text_field :context %>
-	  <br><%= f.submit "Create" %>
-	<% end %>
-	
+	<%= render partial: "form" %>
 
+	
 </div>

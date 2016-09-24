@@ -1,0 +1,2 @@
+module TechnewsHelper
+end

@@ -1,0 +1,13 @@
+
+<div>
+<% @response.each do |i| %>
+	<ul>
+		<li><%= i["title"] %></li>
+		<li><em><%= i["author"] %></em></li><br>
+		<li> <img src= <%=i["urlToImage"]%> /> </li><br>
+		<li><%= i["description"] %><a href= <%=i["url"]%> >read more</a></li><br>
+		<li><%= i["publishedAt"] %></li><br>
+	</ul>
+	<%end%>
+
+</div>
