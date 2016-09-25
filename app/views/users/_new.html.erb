@@ -1,0 +1,6 @@
+<% if current_user %>
+ 		<li><%= link_to "signout", "/signout"%></li>
+<%else%>
+		<li><%= link_to "sign in with GitHub", "/auth/github"%></li>
+
+<%end%>

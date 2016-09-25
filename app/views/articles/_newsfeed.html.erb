@@ -1,13 +1,24 @@
-
-<div>
-<% @response.each do |i| %>
-	<ul>
-		<li><%= i["title"] %></li>
-		<li><em><%= i["author"] %></em></li><br>
-		<li> <img src= <%=i["urlToImage"]%> /> </li><br>
-		<li><%= i["description"] %><a href= <%=i["url"]%> >read more</a></li><br>
-		<li><%= i["publishedAt"] %></li><br>
-	</ul>
+<div class="container">	
+	<div class="row">
+	<% @response.each do |i| %>
+		<div class="row">
+			<div class="col-xs-1 .col-sm-2 col-lg-2"></div>
+		  <div class="col-xs-12 .col-sm-6 col-lg-8">
+		    <div class="thumbnail">
+		      <img class="img-news" src= <%=i["urlToImage"]%> >
+		      <div class="caption">
+		        <h3><%= i["title"] %></h3>
+		        <p><%= i["description"] %></p>
+		        <p>
+		        	<em><%= i["author"] %> | <%= i["publishedAt"] %></em><br>
+		        	<a href= <%=i["url"]%> class="btn btn-primary" role="button">read more</a>
+		        </p>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	<%end%>
-
 </div>
+</div>
+
+
