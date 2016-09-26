@@ -1,10 +1,89 @@
-<div> 
-	<%= form_for @post, method: @method, url: {action: @action} do |f| %>
-	  <%= label(:post,:title) %>
-	  <%= f.text_field :title %><br>
-	  <%= label(:post,:context) %>
-	  <%= f.text_field :context %>
-	  <br><%= f.submit "submit" %>
-	<% end %>
-	
-</div>
+<% 
+require 'openssl'
+require 'date'
+require 'base64'
+def gen_token()
+    digest = OpenSSL::Digest.new('sha256')
+    secret = 'xxraof87pndt87pl'
+    time_created = Time.now.to_i * 1000 # convert to ms
+    hmac = OpenSSL::HMAC.digest(digest, secret, time_created.to_s)
+    { msg_mac: Base64.encode64(hmac).strip, time_created: time_created }
+end
+
+	@token = gen_token()
+	%>
+	<div class="col-md-offset-2 col-md-8">
+		<%= form_for @post, method: @method, url: {action: @action} do |f| %>
+    <div class="form-group">
+ 	 	<label class="control-label" for="inputDefault">
+ 	 		<%= label(:post,:title) %>
+ 	 	</label>
+  		<%= f.text_field :title, class: "form-control" %>
+	</div>
+    <div class="form-group">
+    	
+      <label for="textArea" class="col-lg-2 control-label">
+      	<%= label(:post,:context) %>
+      </label>
+      <!-- <div class="col-lg-10"> -->
+        <%= f.text_field :context, class: "form-control" %> 
+        <span class="help-block"></span>
+<!--       </div>
+ -->    </div>
+
+    <div style="height: 400px;" class="col-md-12" id="editor"></div>
+
+        <div style="height: 400px; display: none;" class="col-md-12" id="result"></div>
+
+<!-- <a href="#" onClick="runCode()" class="btn btn-primary">run code</a>
+ -->
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary"<% f.submit "submit" %>>submit</button>
+      </div>
+    </div>
+	</div>
+
+
+
+    <script>
+    var token = <%==  @token.to_json %>
+    var repl = new ReplitClient('api.repl.it', 80, 'ruby', token);
+    
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/ruby");
+        	
+
+    function runCode(){
+
+    repl.evaluateOnce(
+   editor.getValue(), {
+   stdout: function(output) {
+     // output from the ruby process: hello world
+     console.log(output);
+   }
+ }).then(
+   function success(result) {
+     // The evaluation succeeded. Result will contain `data` or `error`
+     // depending on whether the code compiled and ran or if there was an
+     // error.
+     $("#result").show().slideInUp();
+     if (result.error) {
+       console.log('Error:', result.error);
+     } else {
+       console.log('Result', result.data);
+     }
+   },
+   function error(error) {
+     // There was an error connecting to the service :(
+     console.error('Error connecting to repl.it');
+   }
+ );
+    }
+
+    </script>
+
+    	<% end %>
+

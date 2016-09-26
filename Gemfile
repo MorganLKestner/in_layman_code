@@ -34,6 +34,7 @@ gem "twitter-bootstrap-rails"
 gem 'httparty'
 gem 'highlight_js-rails4'
 gem 'rubocop', '~> 0.43.0', require: false
+gem 'search_cop'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

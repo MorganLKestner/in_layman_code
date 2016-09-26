@@ -1,6 +1,41 @@
+
+
 class PostsController < ApplicationController
+
+
+
 	def index
-		@posts = Post.all
+		q = ''
+		params.each do |key,value|
+			puts "key:" + key
+			puts "value: " + value
+			if key != 'action' && key != 'controller'
+				q += value
+			end
+  			#Rails.logger.warn "Param #{key}: #{value}"
+		end
+		if q.length > 2 
+			puts "SEARCHING!"
+			@posts = Post.search(q)
+		else 
+			puts "ALLLLLL"
+			@posts = Post.all()
+		end
+
+
+
+		# if parameters
+		# while paramters exit
+		# .where("param LIKE 'paramValue")
+		# if(q){ 
+		# 	.where("title or content LIKE 'mememe jjkkj'")
+		# }
+		# if(lang){ 
+		# 	.where("language = 'langugevalue'")
+		# }
+
+		#.where("title LIKE 'mememe jjkkj'")
+
 	end
 
 	def show
