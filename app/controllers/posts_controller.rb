@@ -45,7 +45,7 @@ class PostsController < ApplicationController
 	def create
 		user = current_user.id
 		post = params["post"]
-		Post.create( title: post["title"], context: post["context"], user_id: user )
+		Post.create( title: post["title"], content: post["content"], user_id: user )
 		redirect_to ("/posts") 
 	end
 
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
     	@post = Post.find_by(id: params[:id])
     	user = current_user.id
     	post = params["post"]
-    	@post.update( title: post["title"], context: post["context"], user_id: user )
+    	@post.update( title: post["title"], content: post["content"], user_id: user )
 		redirect_to ("/posts")
 	end
 
@@ -79,7 +79,7 @@ class PostsController < ApplicationController
     	@post = Post.find_by(id: params[:id])
     	user = current_user.id
     	post = params["post"]
-    	@post.destroy( title: post["title"], context: post["context"], user_id: user )
+    	@post.destroy( title: post["title"], content: post["content"], user_id: user )
 		redirect_to ("/posts")
 	end
 

@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   include SearchCop
 
   search_scope :search do
-    attributes :title, :context
+    attributes :title, :content
   end
 
   belongs_to :user
