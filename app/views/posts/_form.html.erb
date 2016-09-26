@@ -12,6 +12,7 @@ end
 
 	@token = gen_token()
 	%>
+
 	<div class="col-md-offset-2 col-md-8">
 		<%= form_for @post, method: @method, url: {action: @action} do |f| %>
     <div class="form-group">
@@ -23,16 +24,28 @@ end
     <div class="form-group">
     	
       <label for="textArea" class="col-lg-2 control-label">
-      	<%= label(:post,:context) %>
+      	<%= label(:post,:content) %>
       </label>
       <!-- <div class="col-lg-10"> -->
-        <%= f.text_field :context, class: "form-control" %> 
+        <%= f.text_field :content, class: "form-control" %> 
         <span class="help-block"></span>
-<!--       </div>
- -->    </div>
+   </div>
+   <div class="form-group">
+      <label for="select" class="col-lg-2 control-label">
+        <%=label(:post,:language)%> 
+      </label>
+         <%= f.select(:language, ['ruby', 'javascript', 'python'], {}, { :class => 'form-control' }) %>
 
-    <div style="height: 400px;" class="col-md-12" id="editor"></div>
+      </div>
 
+    <div class="col-md-12 edit-container">
+      <label for="editor" class="col-lg-2 control-label">
+        <% label(:post,:rcode) %> Editor
+      </label>
+      <textarea name="post[rcode]"></textarea>
+      <div id="editor"></div>
+        <%#= f.text_field :rcode, id: "editor" %><!--editor   -->
+  </div> 
         <div style="height: 400px; display: none;" class="col-md-12" id="result"></div>
 
 <!-- <a href="#" onClick="runCode()" class="btn btn-primary">run code</a>
@@ -49,11 +62,18 @@ end
 
     <script>
     var token = <%==  @token.to_json %>
+    var textarea = $('textarea[name="post[rcode]"]').hide();
     var repl = new ReplitClient('api.repl.it', 80, 'ruby', token);
     
     var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/ruby");
+    editor.getSession()
+      .setValue(textarea.val())
+      .setMode("ace/mode/ruby")
+      .setTheme("ace/theme/monokai");
+
+    editor.getSession().on('change', function(){
+      textarea.val(editor.getSession().getValue());
+    });
         	
 
     function runCode(){

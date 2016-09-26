@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <link rel="stylesheet" href="https://bootswatch.com/readable/bootstrap.min.css"/>
-
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdn.jsdelivr.net/g/ace@1.2.4(min/ace.js+min/ext-beautify.js+min/ext-static_highlight.js+min/ext-textarea.js+min/mode-css.js+min/mode-javascript.js+min/mode-ruby.js)">
         </script>
           <script src="https://repl.it/lib/api.js" type="text/javascript" charset="utf-8"></script>
@@ -40,8 +40,16 @@
         </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/posts">posts</a></li>
-          <li><a href="/posts/new">contribute</a></li>
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">posts <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/posts">read posts</a></li>
+            <li class="divider"></li>
+            <li><a href="/posts/new">add post</a></li>
+            <li class="divider"></li>
+            <li><a href="#">edit post</a></li>
+          </ul>
+        </li>
           <li><a href="/articles">tech_crunch</a></li>
           <li><a href="#">has_many_ideas</a></li>
 
@@ -92,7 +100,7 @@
             <li>Based on <a href="http://getbootstrap.com" rel="nofollow">Bootstrap</a>. Icons from <a href="http://fortawesome.github.io/Font-Awesome/" rel="nofollow">Font Awesome</a>.Web fonts from <a href="http://www.google.com/webfonts" rel="nofollow">Google</a>.
             </li>
             <li> 
-            All rights reserved © 2016 In Layman Code | Morgan Lee Kestner 
+            All rights reserved &copy; 2016 In Layman Code | Morgan Lee Kestner 
             </li>
           </ul>
         </div>
