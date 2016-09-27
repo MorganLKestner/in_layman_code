@@ -1,9 +1,13 @@
 
 <div class="container"</div>
+<% if current_user %>
   <fieldset>	
   <legend>Create Post</legend>
 	<%= render partial: "form" %>
   </fieldset>
+  <% else %> 
+	<%= render partial: "cantedit" %>
+	 <%end%>
 </div>
 
 	

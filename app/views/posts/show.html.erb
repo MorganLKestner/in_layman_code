@@ -1,9 +1,17 @@
 <h1>post</h1>
 
-
+<%if current_user %>
 	<div class="post-container"> 
+	<%= render partial: "postshow" %>
 		<h3><%= @post.title %></h3>
 		<p class ="content"> <%= @post.content %></p>
 		<div class ="editor"> <%= @post.rcode %> </div>
+		<p><a class = "btn btn-primary btn-lg" href="/<%=@post%>/edit">Edit</a></p>
+		
+	<% else %>
+	<%= render partial: "postshow" %>
 	</div>
+	<%end%>
+
+
 	
