@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
 	  def index
       base_uri = "https://newsapi.org/v1/articles?source=techcrunch&sortBy=top&apiKey="
-      @response = HTTParty.get(base_uri + NEWS_API_KEY)["articles"]
+      @response = HTTParty.get(base_uri + ENV['NEWS_API_KEY'])["articles"]
 
   end
 
