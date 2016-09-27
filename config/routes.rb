@@ -11,6 +11,6 @@ Rails.application.routes.draw do
 	get "https://github.com/login/oauth/authorize" => "sessions#create"
 	post "https://github.com/login/oauth/access_token"
 
-	# get "/auth/:provider/callback" => "sessions#create"
+	 get "/auth/:provider/callback" => "sessions#create"
 	get "/signout" => "sessions#destroy", :as => :signout
 end
